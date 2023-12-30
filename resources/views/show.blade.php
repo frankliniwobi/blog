@@ -9,7 +9,10 @@
 </head>
 
 <body>
-    {!! $post !!}
+    <article>
+        {!! $post !!}
+    </article>
+
 
     <a href="/">Go home</a>
 </body>
