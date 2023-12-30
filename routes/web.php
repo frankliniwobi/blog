@@ -26,9 +26,11 @@ Route::get('/posts/{post}', function ($slug) {
         abort(404);
     }
 
-    $post = file_get_contents($path);
+    $post = cache()->remember("post.{$slug}", 5, function() use ($path) {
+        return file_get_contents($path);
+    });
 
     return view('show', [
         'post' => $post
     ]);
-})->whereAlpha('post');
+})->where('post', '[A-z_\-]+');
