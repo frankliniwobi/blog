@@ -13,7 +13,7 @@ class PostsControlller extends Controller
             'posts' => Post::query()
                 ->latest()
                 ->filter(request(['search', 'category', 'author']))
-                ->paginate(3)
+                ->paginate(12)
                 ->withQueryString()
         ]);
     }
