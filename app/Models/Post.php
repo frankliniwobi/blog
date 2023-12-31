@@ -21,5 +21,18 @@ class Post extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function scopeFilter($query, array $filters)
+    {
+        if ($filters ?? false) {
+            $search = $filters['search'];
+
+            return $query->where('title', 'like', "%{$search}%")
+                ->orWhere('excerpt', 'like', "%{$search}%")
+                ->orWhere('body', 'like', "%{$search}%");
+        }
+
+        return $query;
+    }
+
 
 }
