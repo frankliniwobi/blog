@@ -22,7 +22,9 @@ class RegisterController extends Controller
             'password_confirmation' => ['required']
         ]);
 
-        User::create($attributes);
+        $user = User::create($attributes);
+
+        auth()->login($user);
 
         return redirect('/')->with('success', 'Account created successfully!');
     }

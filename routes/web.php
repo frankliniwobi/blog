@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogOutController;
 use App\Http\Controllers\PostsControlller;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -19,5 +21,14 @@ Route::get('/', [PostsControlller::class, 'index'])->name('home');
 
 Route::get('/posts/{post:slug}', [PostsControlller::class, 'show']);
 
-Route::get('/register', [RegisterController::class, 'create']);
-Route::post('/register', [RegisterController::class, 'store']);
+Route::middleware('guest')->group(function() {
+
+    Route::get('/register', [RegisterController::class, 'create']);
+    Route::post('/register', [RegisterController::class, 'store']);
+
+    Route::get('/login', [LoginController::class, 'create']);
+    Route::post('/login', [LoginController::class, 'store']);
+
+});
+
+Route::post('/logout', LogOutController::class)->middleware('auth');
