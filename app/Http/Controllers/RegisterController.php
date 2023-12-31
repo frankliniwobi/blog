@@ -15,8 +15,8 @@ class RegisterController extends Controller
     public function store()
     {
         $attributes = request()->validate([
-            'name' => ['required', 'string', 'max:100'],
-            'username' => ['required', 'string', 'max:100', 'unique:users,username'],
+        'name' => ['required', 'string', 'max:100'],
+            'username' => ['required', 'string', 'max:100', 'min:5', 'unique:users,username'],
             'email' => ['email', 'required', 'unique:users,email', 'max:100'],
             'password' => ['required', 'confirmed'],
             'password_confirmation' => ['required']
@@ -24,6 +24,6 @@ class RegisterController extends Controller
 
         User::create($attributes);
 
-        return redirect('/');
+        return redirect('/')->with('success', 'Account created successfully!');
     }
 }
