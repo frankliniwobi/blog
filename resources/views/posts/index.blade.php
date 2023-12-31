@@ -8,6 +8,8 @@
 
             <x-blog-grid :posts="$posts" />
 
+            {{ $posts->links() }}
+
         @else
 
             <p class="text-center text-yellow-500 font-bold" >No posts available yet.
