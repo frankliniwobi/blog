@@ -21,22 +21,22 @@ Route::get('/', [PostsControlller::class, 'index']);
 
 Route::get('/posts/{post:slug}', function (Post $post) {
 
-    return view('show', [
-        'post' => $post->load(['user', 'category'])
+    return view('posts.show', [
+        'post' => $post->load(['author', 'category'])
     ]);
 
 });
 
 Route::get('/categories/{category:slug}', function (Category $category) {
 
-    return view('welcome', [
-        'posts' => $category->posts->load(['user', 'category'])
+    return view('posts.index', [
+        'posts' => $category->posts->load(['author', 'category'])
     ]);
  });
 
 Route::get('/author/{author:username}', function (User $author) {
 
-    return view('welcome', [
-        'posts' => $author->posts->load(['user', 'category'])
+    return view('posts.index', [
+        'posts' => $author->posts->load(['author', 'category'])
     ]);
  });

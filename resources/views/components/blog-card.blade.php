@@ -10,7 +10,7 @@
         <div class="mt-8 flex flex-col justify-between">
             <header>
                 <div class="space-x-2">
-                    <a href="/categories/{{ $post->category->slug }}"
+                    <a href="/?category={{ $post->category->slug }}"
                         class="px-3 py-1 border border-red-300 rounded-full text-red-300 text-xs uppercase font-semibold"
                         style="font-size: 10px">{{ $post->category->name }}</a>
                 </div>
@@ -37,7 +37,7 @@
                     <img src="/images/lary-avatar.svg" alt="Lary avatar">
                     <div class="ml-3">
                         <h5 class="font-bold">
-                            <a class="underline text-blue-500" href="/author/{{ $post->user->username }}">{{ $post->user->name }}</a>
+                            <a class="underline text-blue-500" href="/author/{{ $post->author->username }}">{{ $post->author->name }}</a>
                         </h5>
                         <h6>Mascot at Laracasts</h6>
                     </div>

@@ -9,11 +9,11 @@ class PostsControlller extends Controller
 {
     public function index()
     {
-        return view('welcome', [
+        return view('posts.index', [
             'posts' => Post::query()
                 ->latest()
-                ->with(['user', 'category'])
-                ->filter(request(['search']))
+                ->with(['author', 'category'])
+                ->filter(request(['search', 'category']))
                 ->get()
         ]);
     }
