@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
 
-   $posts = Post::all();
+   $posts = Post::latest()->with(['user', 'category'])->get();
 
    return view('welcome', [
        'posts' => $posts
@@ -28,7 +28,7 @@ Route::get('/', function () {
 Route::get('/posts/{post:slug}', function (Post $post) {
 
     return view('show', [
-        'post' => $post
+        'post' => $post->load(['user', 'category'])
     ]);
 
 });
@@ -36,13 +36,13 @@ Route::get('/posts/{post:slug}', function (Post $post) {
 Route::get('/categories/{category:slug}', function (Category $category) {
 
     return view('welcome', [
-        'posts' => $category->posts
+        'posts' => $category->posts->load(['user', 'category'])
     ]);
  });
 
 Route::get('/author/{author:username}', function (User $author) {
 
     return view('welcome', [
-        'posts' => $author->posts
+        'posts' => $author->posts->load(['user', 'category'])
     ]);
  });
