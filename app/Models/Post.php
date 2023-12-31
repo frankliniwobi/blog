@@ -23,15 +23,19 @@ class Post extends Model
 
     public function scopeFilter($query, array $filters)
     {
-        if ($filters ?? false) {
-            $search = $filters['search'];
+        // if ($filters ?? false) {
+        //     $search = $filters['search'];
 
-            return $query->where('title', 'like', "%{$search}%")
-                ->orWhere('excerpt', 'like', "%{$search}%")
-                ->orWhere('body', 'like', "%{$search}%");
-        }
+        //     return $query->where('title', 'like', "%{$search}%")
+        //         ->orWhere('excerpt', 'like', "%{$search}%")
+        //         ->orWhere('body', 'like', "%{$search}%");
+        // }
 
-        return $query;
+        $query->when($filters['search'] ?? false, fn ($query, $search) =>
+            $query->where('title', 'like', "%{$search}%")
+                    ->orWhere('excerpt', 'like', "%{$search}%")
+                    ->orWhere('body', 'like', "%{$search}%")
+        );
     }
 
 
