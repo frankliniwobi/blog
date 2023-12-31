@@ -1,9 +1,6 @@
 <?php
 
 use App\Http\Controllers\PostsControlller;
-use App\Models\Post;
-use App\Models\User;
-use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
 /*
