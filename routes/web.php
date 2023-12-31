@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostsControlller;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
@@ -16,24 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-
-    // dd(request()->has('search'));
-
-    $posts = Post::latest()->with(['user', 'category']);
-
-    $search = request('search');
-
-    if (request()->has('search')) {
-        $posts = $posts->where('title', 'like', "%{$search}%")
-            ->orWhere('excerpt', 'like', "%{$search}%")
-            ->orWhere('body', 'like', "%{$search}%");
-    }
-
-   return view('welcome', [
-       'posts' => $posts->get()
-   ]);
-});
+Route::get('/', [PostsControlller::class, 'index']);
 
 Route::get('/posts/{post:slug}', function (Post $post) {
 
