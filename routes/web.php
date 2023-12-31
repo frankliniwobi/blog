@@ -17,26 +17,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [PostsControlller::class, 'index']);
+Route::get('/', [PostsControlller::class, 'index'])->name('home');
 
-Route::get('/posts/{post:slug}', function (Post $post) {
-
-    return view('posts.show', [
-        'post' => $post->load(['author', 'category'])
-    ]);
-
-});
-
-Route::get('/categories/{category:slug}', function (Category $category) {
-
-    return view('posts.index', [
-        'posts' => $category->posts->load(['author', 'category'])
-    ]);
- });
-
-Route::get('/author/{author:username}', function (User $author) {
-
-    return view('posts.index', [
-        'posts' => $author->posts->load(['author', 'category'])
-    ]);
- });
+Route::get('/posts/{post:slug}', [PostsControlller::class, 'show']);

@@ -10,7 +10,9 @@
 
         @else
 
-            <p class="text-center text-yellow-500 font-bold" >No posts available yet.</p>
+            <p class="text-center text-yellow-500 font-bold" >No posts available yet.
+                <a href="/" class="text-blue-500 underline" >Back Home</a>
+            </p>
 
         @endif
     </main>
