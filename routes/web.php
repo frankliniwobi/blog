@@ -15,33 +15,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $files = File::files(resource_path("posts"));
-    $posts = [];
 
-    foreach ($files as $file) {
-        $document = \Spatie\YamlFrontMatter\YamlFrontMatter::parseFile($file);
+   $posts = Post::all();
 
-        $posts[] = new Post(
-            $document->title,
-            $document->excerpt,
-            $document->body,
-            $document->date,
-            $document->slug,
-        );
-    }
-
-//    $posts = Post::all();
    return view('welcome', [
        'posts' => $posts
    ]);
 });
 
-Route::get('/posts/{post}', function ($slug) {
-
-    //find a post by its slug
-    $post = Post::find($slug);
+Route::get('/posts/{post:slug}', function (Post $post) {
 
     return view('show', [
         'post' => $post
     ]);
-})->where('post', '[A-z_\-]+');
+
+});
