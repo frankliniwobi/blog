@@ -15,10 +15,25 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $posts = Post::all();
-    return view('welcome', [
-        'posts' => $posts
-    ]);
+    $files = File::files(resource_path("posts"));
+    $posts = [];
+
+    foreach ($files as $file) {
+        $document = \Spatie\YamlFrontMatter\YamlFrontMatter::parseFile($file);
+
+        $posts[] = new Post(
+            $document->title,
+            $document->excerpt,
+            $document->body,
+            $document->date,
+            $document->slug,
+        );
+    }
+
+//    $posts = Post::all();
+   return view('welcome', [
+       'posts' => $posts
+   ]);
 });
 
 Route::get('/posts/{post}', function ($slug) {
