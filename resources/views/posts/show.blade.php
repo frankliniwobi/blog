@@ -55,14 +55,15 @@
             </div>
 
             <section class="col-span-8 col-start-5 mt-10 space-y-6">
-                <h4 class="font-bold text-md" >Comments</h4>
-                @forelse ($post->comments as $comment)
+                <h4 class="font-bold text-md" >Comments </h4>
+                @forelse ($comments as $comment)
                     <x-post-comment :comment="$comment" />
                 @empty
                     <div class="text-yellow-500 font-bold" >
                         No comments for this post yet
                     </div>
                 @endforelse
+                <p>{{ $comments->links() }}</p>
             </section>
         </article>
     </main>

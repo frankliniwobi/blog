@@ -21,7 +21,10 @@ class PostsControlller extends Controller
     public function show(Post $post)
     {
         return view('posts.show', [
-            'post' => $post->load('comments')
+            'post' => $post,
+            'comments' => $post->comments()->simplePaginate(
+                $perPage = 5, $columns = ['*'], $pageName = 'comments'
+            )->withQueryString()
         ]);
     }
 }
