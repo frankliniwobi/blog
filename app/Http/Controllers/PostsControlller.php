@@ -22,7 +22,7 @@ class PostsControlller extends Controller
     {
         return view('posts.show', [
             'post' => $post,
-            'comments' => $post->comments()->simplePaginate(
+            'comments' => $post->comments()->latest()->simplePaginate(
                 $perPage = 5, $columns = ['*'], $pageName = 'comments'
             )->withQueryString()
         ]);

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogOutController;
+use App\Http\Controllers\PostCommentsController;
 use App\Http\Controllers\PostsControlller;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -31,4 +32,9 @@ Route::middleware('guest')->group(function() {
 
 });
 
-Route::post('/logout', LogOutController::class)->middleware('auth');
+Route::middleware('auth')->group(function() {
+
+    Route::post('/logout', LogOutController::class)->middleware('auth');
+
+    Route::post('/posts/{post:slug}/comments', [PostCommentsController::class, 'store']);
+});
