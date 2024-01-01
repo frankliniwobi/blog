@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -20,6 +21,8 @@ class DatabaseSeeder extends Seeder
 
         $categories = Category::factory(3)->create();
 
-        Post::factory(20)->recycle($users)->recycle($categories)->create();
+        $posts = Post::factory(20)->recycle($users)->recycle($categories)->create();
+
+        $comments = Comment::factory(50)->recycle($users)->recycle($posts)->create();
     }
 }
