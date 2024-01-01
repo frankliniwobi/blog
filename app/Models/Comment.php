@@ -10,9 +10,11 @@ class Comment extends Model
 {
     use HasFactory;
 
-    public function user(): BelongsTo
+    protected $with = ['author'];
+
+    public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function post(): BelongsTo
