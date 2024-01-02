@@ -38,3 +38,6 @@ Route::middleware('auth')->group(function() {
 
     Route::post('/posts/{post:slug}/comments', [PostCommentsController::class, 'store']);
 });
+
+Route::get('/admin/posts/create', [PostsControlller::class, 'create'])->middleware('admin');
+Route::post('/admin/posts/create', [PostsControlller::class, 'store'])->middleware('admin');
